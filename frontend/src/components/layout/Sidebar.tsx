@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavLink, useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import {
@@ -26,51 +26,6 @@ interface Props {
   onClose: () => void
 }
 
-export function Sidebar({ open, onClose }: Props) {
-  const { t }      = useTranslation()
-  const { user }   = useAuth()
-  const location   = useLocation()
-
-  // Close on route change when in mobile overlay mode
-  useEffect(() => {
-    if (window.innerWidth < 768) onClose()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location.pathname])
-
-  return (
-    <>
-      {/* Mobile backdrop */}
-      <div
-        className={`fixed inset-0 bg-black/40 z-40 transition-opacity duration-300 md:hidden ${
-          open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={onClose}
-      />
-
-      <aside
-        className={[
-          'flex flex-col bg-white dark:bg-slate-900 border-e border-gray-100 dark:border-slate-800 shadow-sm transition-all duration-300 flex-shrink-0',
-          // Mobile: fixed overlay drawer from left
-          'fixed inset-y-0 left-0 z-50 w-72 md:hidden',
-          open ? 'translate-x-0 shadow-2xl' : '-translate-x-full',
-        ].join(' ')}
-      >
-        <SidebarContent t={t} user={user} collapsed={false} onClose={onClose} showClose />
-      </aside>
-
-      {/* Desktop inline sidebar */}
-      <aside
-        className={[
-          'hidden md:flex flex-col h-screen bg-white dark:bg-slate-900 border-e border-gray-100 dark:border-slate-800 shadow-sm transition-all duration-300 flex-shrink-0',
-          open ? 'w-64' : 'w-[68px]',
-        ].join(' ')}
-      >
-        <SidebarContent t={t} user={user} collapsed={!open} />
-      </aside>
-    </>
-  )
-}
-
 function SidebarContent({
   t, user, collapsed, onClose, showClose,
 }: {
@@ -81,7 +36,7 @@ function SidebarContent({
   showClose?: boolean
 }) {
   return (
-    <>
+    <div dir="rtl" className="flex flex-col h-full">
       {/* Logo */}
       <div className={`flex items-center h-16 border-b border-gray-100 dark:border-slate-800 flex-shrink-0 ${collapsed ? 'justify-center px-2' : 'gap-3 px-5'}`}>
         <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm">
@@ -140,6 +95,77 @@ function SidebarContent({
           )
         )}
       </div>
+    </div>
+  )
+}
+
+export function Sidebar({ open, onClose }: Props) {
+  const { t }    = useTranslation()
+  const { user } = useAuth()
+  const location = useLocation()
+
+  // Track whether we're on desktop using matchMedia (more reliable than CSS classes)
+  const [isDesktop, setIsDesktop] = useState(() => window.innerWidth >= 768)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const handler = (e: MediaQueryListEvent) => {
+      setIsDesktop(e.matches)
+      if (!e.matches) onClose() // always close when switching to mobile
+    }
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [onClose])
+
+  // Close overlay on navigation (mobile only)
+  useEffect(() => {
+    if (!isDesktop) onClose()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname])
+
+  // Prevent body scroll when mobile drawer is open
+  useEffect(() => {
+    if (!isDesktop && open) {
+      document.body.classList.add('overflow-hidden')
+    } else {
+      document.body.classList.remove('overflow-hidden')
+    }
+    return () => document.body.classList.remove('overflow-hidden')
+  }, [isDesktop, open])
+
+  const commonAside = 'flex flex-col bg-white dark:bg-slate-900 border-e border-gray-100 dark:border-slate-800 shadow-sm flex-shrink-0'
+
+  return (
+    <>
+      {/* ── Mobile: fixed overlay from the right (RTL-correct) ────── */}
+      {!isDesktop && (
+        <>
+          {/* Backdrop */}
+          <div
+            className={`fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
+              open ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+            onClick={onClose}
+          />
+          {/* Drawer — slides in from the right */}
+          <aside
+            className={`${commonAside} fixed inset-y-0 right-0 z-50 w-72 transition-transform duration-300 ${
+              open ? 'translate-x-0 shadow-2xl' : 'translate-x-full'
+            }`}
+          >
+            <SidebarContent t={t} user={user} collapsed={false} onClose={onClose} showClose />
+          </aside>
+        </>
+      )}
+
+      {/* ── Desktop: inline sidebar ────────────────────────────────── */}
+      {isDesktop && (
+        <aside
+          className={`${commonAside} h-screen transition-all duration-300 ${open ? 'w-64' : 'w-[68px]'}`}
+        >
+          <SidebarContent t={t} user={user} collapsed={!open} />
+        </aside>
+      )}
     </>
   )
 }
