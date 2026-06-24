@@ -1,0 +1,133 @@
+import i18n from 'i18next'
+import { initReactI18next } from 'react-i18next'
+
+const ar = {
+  translation: {
+    app: { name: 'كشفي' },
+    nav: {
+      dashboard: 'لوحة التحكم',
+      members: 'الأعضاء',
+      units: 'الطلائع',
+      activities: 'الأنشطة',
+      badges: 'الشارات',
+      training: 'التدريب',
+      leaderboard: 'لوحة المتصدرين',
+      communication: 'التواصل',
+      reports: 'التقارير',
+      equipment: 'المعدات',
+    },
+    auth: {
+      login: 'تسجيل الدخول',
+      logout: 'تسجيل الخروج',
+      email: 'البريد الإلكتروني',
+      phone: 'رقم الهاتف',
+      password: 'كلمة المرور',
+      forgotPassword: 'نسيت كلمة المرور؟',
+      changePassword: 'تغيير كلمة المرور',
+    },
+    common: {
+      save: 'حفظ',
+      cancel: 'إلغاء',
+      delete: 'حذف',
+      edit: 'تعديل',
+      create: 'إنشاء',
+      search: 'بحث',
+      filter: 'تصفية',
+      loading: 'جاري التحميل...',
+      noResults: 'لا توجد نتائج',
+      confirm: 'تأكيد',
+      back: 'رجوع',
+      next: 'التالي',
+      previous: 'السابق',
+      of: 'من',
+      total: 'المجموع',
+      active: 'نشط',
+      inactive: 'غير نشط',
+      male: 'ذكر',
+      female: 'أنثى',
+    },
+    sections: {
+      ashbal: 'أشبال',
+      kashaf: 'كشاف',
+      jawala: 'جوالة',
+      mukashe: 'مكاشفة',
+    },
+    roles: {
+      super_admin: 'مدير النظام',
+      leader: 'قائد',
+      assistant: 'مساعد قائد',
+      member: 'عنصر',
+      parent: 'ولي أمر',
+    },
+  },
+}
+
+const en = {
+  translation: {
+    app: { name: 'Kashfi' },
+    nav: {
+      dashboard: 'Dashboard',
+      members: 'Members',
+      units: 'Units',
+      activities: 'Activities',
+      badges: 'Badges',
+      training: 'Training',
+      leaderboard: 'Leaderboard',
+      communication: 'Communication',
+      reports: 'Reports',
+      equipment: 'Equipment',
+    },
+    auth: {
+      login: 'Login',
+      logout: 'Logout',
+      email: 'Email',
+      phone: 'Phone',
+      password: 'Password',
+      forgotPassword: 'Forgot password?',
+      changePassword: 'Change password',
+    },
+    common: {
+      save: 'Save',
+      cancel: 'Cancel',
+      delete: 'Delete',
+      edit: 'Edit',
+      create: 'Create',
+      search: 'Search',
+      filter: 'Filter',
+      loading: 'Loading...',
+      noResults: 'No results',
+      confirm: 'Confirm',
+      back: 'Back',
+      next: 'Next',
+      previous: 'Previous',
+      of: 'of',
+      total: 'Total',
+      active: 'Active',
+      inactive: 'Inactive',
+      male: 'Male',
+      female: 'Female',
+    },
+    sections: {
+      ashbal: 'Cubs',
+      kashaf: 'Scouts',
+      jawala: 'Rovers',
+      mukashe: 'Senior Scouts',
+    },
+    roles: {
+      super_admin: 'Super Admin',
+      leader: 'Leader',
+      assistant: 'Assistant Leader',
+      member: 'Member',
+      parent: 'Parent',
+    },
+  },
+}
+
+i18n.use(initReactI18next).init({
+  resources: { ar, en },
+  lng: import.meta.env.VITE_DEFAULT_LOCALE ?? 'ar',
+  fallbackLng: 'en',
+  interpolation: { escapeValue: false },
+})
+
+export default i18n

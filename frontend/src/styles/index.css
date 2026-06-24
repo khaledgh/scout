@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 109 40 217;
+    --color-secondary: 217 119 6;
+    --color-accent: 79 70 229;
+    --color-surface: 255 255 255;
+    --color-surface-raised: 249 250 251;
+    --color-border: 229 231 235;
+    --color-text: 17 24 39;
+    --color-text-muted: 107 114 128;
+  }
+
+  .dark {
+    --color-surface: 15 23 42;
+    --color-surface-raised: 30 41 59;
+    --color-border: 51 65 85;
+    --color-text: 241 245 249;
+    --color-text-muted: 148 163 184;
+  }
+
+  html {
+    font-family: 'Cairo', 'Inter', sans-serif;
+  }
+
+  html[dir='rtl'] {
+    font-family: 'Cairo', sans-serif;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-slate-100;
+  }
+
+  * {
+    @apply border-gray-200 dark:border-slate-700;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-600 focus:ring-primary-500 shadow-sm;
+  }
+
+  .btn-secondary {
+    @apply btn bg-secondary text-white hover:bg-secondary-600 focus:ring-secondary-500 shadow-sm;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-gray-700 dark:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-800;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+  }
+
+  .card {
+    @apply bg-white dark:bg-slate-800 rounded-2xl shadow-card border border-gray-100 dark:border-slate-700;
+  }
+
+  .input {
+    @apply block w-full rounded-xl border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 px-3 py-2 text-sm text-gray-900 dark:text-slate-100 placeholder-gray-400 dark:placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700 dark:text-slate-300 mb-1;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-green  { @apply badge bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400; }
+  .badge-gold   { @apply badge bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400; }
+  .badge-blue   { @apply badge bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400; }
+  .badge-red    { @apply badge bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400; }
+  .badge-gray   { @apply badge bg-gray-100 text-gray-700 dark:bg-slate-700 dark:text-slate-300; }
+
+  .xp-ring {
+    @apply relative inline-flex items-center justify-center;
+  }
+
+  .page-header {
+    @apply text-2xl font-bold text-gray-900 dark:text-slate-100;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-gray-800 dark:text-slate-200 mb-4;
+  }
+}
+
+@layer utilities {
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+  .rtl-flip { transform: scaleX(-1); }
+
+  [dir='rtl'] .rtl-mirror { transform: scaleX(-1); }
+
+  /* Datetime input segment styling */
+  .datetime-input::-webkit-datetime-edit { padding: 0; }
+  .datetime-input::-webkit-datetime-edit-fields-wrapper { padding: 0; }
+  .datetime-input::-webkit-datetime-edit-year-field,
+  .datetime-input::-webkit-datetime-edit-month-field,
+  .datetime-input::-webkit-datetime-edit-day-field,
+  .datetime-input::-webkit-datetime-edit-hour-field,
+  .datetime-input::-webkit-datetime-edit-minute-field,
+  .datetime-input::-webkit-datetime-edit-ampm-field {
+    border-radius: 4px;
+    padding: 0 2px;
+    color: rgb(17 24 39);
+  }
+  .dark .datetime-input::-webkit-datetime-edit-year-field,
+  .dark .datetime-input::-webkit-datetime-edit-month-field,
+  .dark .datetime-input::-webkit-datetime-edit-day-field,
+  .dark .datetime-input::-webkit-datetime-edit-hour-field,
+  .dark .datetime-input::-webkit-datetime-edit-minute-field,
+  .dark .datetime-input::-webkit-datetime-edit-ampm-field {
+    color: rgb(241 245 249);
+  }
+  .datetime-input::-webkit-datetime-edit-year-field:focus,
+  .datetime-input::-webkit-datetime-edit-month-field:focus,
+  .datetime-input::-webkit-datetime-edit-day-field:focus,
+  .datetime-input::-webkit-datetime-edit-hour-field:focus,
+  .datetime-input::-webkit-datetime-edit-minute-field:focus {
+    background: rgb(var(--color-primary) / 0.12);
+    color: rgb(var(--color-primary));
+    outline: none;
+  }
+  .datetime-input::-webkit-datetime-edit-text { color: rgb(156 163 175); padding: 0 1px; }
+  .datetime-input::-webkit-inner-spin-button { display: none; }
+  .datetime-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    width: 0;
+    padding: 0;
+    margin: 0;
+  }
+}
