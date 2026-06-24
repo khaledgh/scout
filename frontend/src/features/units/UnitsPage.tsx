@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Plus, Users, Trophy, Pencil, Trash2 } from 'lucide-react'
 import { useUnits, useUnitLeaderboard, useDeleteUnit } from '@/hooks/useUnits'
+import { assetUrl } from '@/lib/assetUrl'
 import { Button, Card, Spinner, EmptyState, SectionBadge } from '@/components/ui'
 import { useAuth } from '@/features/auth/AuthContext'
 import { isAdmin as isAdminRole } from '@/lib/permissions'
@@ -57,7 +58,7 @@ export function UnitsPage() {
                 onClick={() => navigate(`/units/${unit.id}`)}>
                 <div className="flex items-start gap-4">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-2xl font-bold flex-shrink-0">
-                    {unit.emblem_url ? <img src={unit.emblem_url} className="w-full h-full object-cover rounded-2xl" /> : unit.name[0]}
+                    {unit.emblem_url ? <img src={assetUrl(unit.emblem_url)} className="w-full h-full object-cover rounded-2xl" /> : unit.name[0]}
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-bold text-gray-900 dark:text-white truncate">{unit.name}</h3>

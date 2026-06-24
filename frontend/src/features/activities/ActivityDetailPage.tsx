@@ -8,6 +8,7 @@ import { Card, Badge, Spinner, Button, Avatar } from '@/components/ui'
 import { CalendarDays, MapPin, Users, CheckCircle, ImagePlus, Images, Play } from 'lucide-react'
 import { format } from 'date-fns'
 import { arLB as ar } from '@/lib/arLB'
+import { assetUrl } from '@/lib/assetUrl'
 import { toast } from 'sonner'
 
 const statusLabel: Record<string, string> = {
@@ -156,8 +157,8 @@ export function ActivityDetailPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
             {activity.media.map((m) =>
               m.media_type === 'image' ? (
-                <a key={m.id} href={m.url} target="_blank" rel="noopener noreferrer">
-                  <img src={m.url} alt={m.caption} className="w-full h-32 object-cover rounded-xl hover:opacity-90 transition-opacity" />
+                <a key={m.id} href={assetUrl(m.url)} target="_blank" rel="noopener noreferrer">
+                  <img src={assetUrl(m.url)} alt={m.caption} className="w-full h-32 object-cover rounded-xl hover:opacity-90 transition-opacity" />
                 </a>
               ) : (
                 <div key={m.id} className="w-full h-32 rounded-xl bg-gray-100 dark:bg-slate-700 flex items-center justify-center">

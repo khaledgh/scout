@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { BookOpen, CheckCircle, Clock, Plus, Pencil, Trash2 } from 'lucide-react'
+import { assetUrl } from '@/lib/assetUrl'
 import { useTrainingLessons, useMyTrainingProgress, useCreateLesson, useUpdateLesson, useDeleteLesson } from '@/hooks/useTraining'
 import { Card, Badge, Spinner, EmptyState, Button, Modal } from '@/components/ui'
 import { useForm } from 'react-hook-form'
@@ -144,7 +145,7 @@ export function TrainingPage() {
                   </div>
                 )}
                 {lesson.cover_url ? (
-                  <img src={lesson.cover_url} alt={lesson.title}
+                  <img src={assetUrl(lesson.cover_url)} alt={lesson.title}
                     className="w-full h-32 object-cover rounded-xl mb-4 -mx-0 -mt-0" />
                 ) : (
                   <div className="w-full h-32 bg-gradient-to-br from-accent/20 to-primary/20 rounded-xl mb-4 flex items-center justify-center">

@@ -152,7 +152,7 @@ export function MemberProfilePage() {
           )}
 
           {/* ── Stats row ──────────────────────────────────────────── */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-5 pt-5 border-t border-gray-100 dark:border-slate-700">
+          <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mt-5 pt-5 border-t border-gray-100 dark:border-slate-700">
             {[
               { label: 'نقاط XP', value: member.xp_total,         color: 'text-primary' },
               { label: 'المستوى',  value: member.level,             color: 'text-accent' },

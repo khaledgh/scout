@@ -6,6 +6,7 @@ import { isLeaderRole } from '@/lib/permissions'
 import { Card, Spinner, Button, Badge } from '@/components/ui'
 import { ArrowRight, BookOpen, ImagePlus, CheckCircle, Images, Play, Trash2 } from 'lucide-react'
 import { toast } from 'sonner'
+import { assetUrl } from '@/lib/assetUrl'
 
 const categoryLabel: Record<string, string> = {
   scout: 'كشفي',
@@ -73,7 +74,7 @@ export function TrainingLessonDetailPage() {
       {/* Cover / Header */}
       <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-card border border-gray-100 dark:border-slate-700 overflow-hidden">
         {lesson.cover_url ? (
-          <img src={lesson.cover_url} alt={lesson.title} className="w-full h-52 object-cover" />
+          <img src={assetUrl(lesson.cover_url)} alt={lesson.title} className="w-full h-52 object-cover" />
         ) : (
           <div className="h-40 bg-gradient-to-l from-primary-800 via-primary to-accent flex items-center justify-center">
             <BookOpen size={48} className="text-white/40" />
@@ -182,11 +183,11 @@ export function TrainingLessonDetailPage() {
             {lesson.media.map((m) => (
               <div key={m.id} className="relative group rounded-2xl overflow-hidden aspect-video bg-gray-100 dark:bg-slate-700">
                 {m.media_type === 'image' ? (
-                  <a href={m.url} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
-                    <img src={m.url} alt={m.caption ?? ''} className="w-full h-full object-cover" />
+                  <a href={assetUrl(m.url)} target="_blank" rel="noopener noreferrer" className="block w-full h-full">
+                    <img src={assetUrl(m.url)} alt={m.caption ?? ''} className="w-full h-full object-cover" />
                   </a>
                 ) : (
-                  <a href={m.url} target="_blank" rel="noopener noreferrer"
+                  <a href={assetUrl(m.url)} target="_blank" rel="noopener noreferrer"
                     className="flex items-center justify-center w-full h-full bg-gray-900">
                     <Play size={32} className="text-white/80" />
                   </a>

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { useMemberLeaderboard } from '@/hooks/useBadges'
 import { useUnitLeaderboard } from '@/hooks/useUnits'
 import { Card, Spinner, Avatar, SectionBadge, Select } from '@/components/ui'
+import { assetUrl } from '@/lib/assetUrl'
 import { Trophy, Users, Shield } from 'lucide-react'
 import type { Section } from '@/types'
 
@@ -125,7 +126,7 @@ export function LeaderboardPage() {
                     {i + 1}
                   </div>
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                    {u.emblem_url ? <img src={u.emblem_url} className="w-full h-full object-cover rounded-xl" /> : u.name[0]}
+                    {u.emblem_url ? <img src={assetUrl(u.emblem_url)} className="w-full h-full object-cover rounded-xl" /> : u.name[0]}
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-gray-900 dark:text-white truncate">{u.name}</p>

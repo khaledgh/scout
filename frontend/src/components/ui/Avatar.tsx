@@ -1,3 +1,5 @@
+import { assetUrl } from '@/lib/assetUrl'
+
 interface Props {
   name: string
   url?: string | null
@@ -29,7 +31,7 @@ export function Avatar({ name, url, size = 'md', className = '' }: Props) {
   if (url) {
     return (
       <img
-        src={url}
+        src={assetUrl(url)}
         alt={name}
         className={`rounded-full object-cover flex-shrink-0 ${sizes[size]} ${className}`}
       />

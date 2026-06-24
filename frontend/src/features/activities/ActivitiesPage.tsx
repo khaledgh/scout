@@ -184,7 +184,7 @@ export function ActivitiesPage() {
             <input {...register('title')} className="input" placeholder="عنوان النشاط" />
             {errors.title && <p className="text-xs text-red-600 mt-1">{errors.title.message}</p>}
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="label">النوع *</label>
               <Controller name="type" control={control} render={({ field }) => (
