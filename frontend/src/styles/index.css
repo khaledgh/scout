@@ -4,6 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Mobile viewport fix ──────────────────────────────────────────────────────
+   iOS Safari treats 100vh as full page height including the address bar,
+   which cuts off the app bottom. 100dvh is the "dynamic" viewport height that
+   shrinks/grows with the toolbar. Falls back to 100vh on older browsers.     */
+@supports (height: 100dvh) {
+  .h-screen { height: 100dvh; }
+}
+
+/* Prevent horizontal scroll on every page */
+html, body { overflow-x: hidden; }
+
+/* Stop iOS rubber-band scroll on the document (content areas still scroll) */
+body { overscroll-behavior-y: none; }
+
+/* Safe-area utility classes for notched/island devices */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+.pt-safe { padding-top:    env(safe-area-inset-top,    0px); }
+
+/* Lock body scroll while mobile sidebar drawer is open */
+body.sidebar-open { overflow: hidden; }
+
 @layer base {
   :root {
     --color-primary: 109 40 217;

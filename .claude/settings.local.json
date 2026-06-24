@@ -1,7 +1,11 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(python3 -c ' *)",
+      "Bash(node -e \"const fs=require\\('fs'\\);console.log\\(fs.readFileSync\\('d:/scout2/frontend/src/styles/index.css','utf8'\\).slice\\(0,3000\\)\\)\")",
+      "Bash(type \"d:\\\\\\\\scout2\\\\\\\\frontend\\\\\\\\src\\\\\\\\styles\\\\\\\\index.css\")",
+      "PowerShell(Get-Content -LiteralPath \"d:\\\\scout2\\\\frontend\\\\src\\\\styles\\\\index.css\" -Raw | ForEach-Object { $_.Substring\\(0, [Math]::Min\\(3000, $_.Length\\)\\) })"
     ]
   }
 }
