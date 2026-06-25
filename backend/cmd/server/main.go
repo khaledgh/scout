@@ -62,13 +62,17 @@ func main() {
 	// Static uploads
 	e.Static(cfg.Upload.PublicPath, cfg.Upload.Dir)
 
+	// Serve frontend static assets (JS, CSS, icons, etc.)
+	e.Static("/assets", "./public/assets")
+	e.Static("/icons",  "./public/icons")
+
 	// API group
 	api := e.Group("/api/v1")
 
 	// Register routes
 	registerRoutes(api, cfg, database, hub)
 
-	// Serve frontend SPA (catch-all for non-API routes)
+	// SPA fallback — all non-API, non-asset routes return index.html
 	e.GET("/*", func(c echo.Context) error {
 		return c.File("./public/index.html")
 	})
